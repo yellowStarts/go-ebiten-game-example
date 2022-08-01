@@ -9,15 +9,38 @@ import (
 
 var (
 	err        error
-	background *ebiten.Image
+	background *ebiten.Image // 背景
+	spaceShip  *ebiten.Image // 太空船
+	playerOne  player        // 玩家
 )
+
+const (
+	screenWidth, screebHeight = 640, 480
+)
+
+// player 玩家结构体
+type player struct {
+	image      *ebiten.Image
+	xPos, yPos float64
+	speed      float64
+}
 
 // init 初始化
 func init() {
+	// 背景
 	background, _, err = ebitenutil.NewImageFromFile("assets/space.png", ebiten.FilterDefault)
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// 太空船
+	spaceShip, _, err = ebitenutil.NewImageFromFile("assets/space_ship.png", ebiten.FilterDefault)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// player
+	playerOne = player{spaceShip, screenWidth / 2.0, screebHeight / 2.0, 4}
 }
 
 // update 更新画布
@@ -30,11 +53,16 @@ func update(screen *ebiten.Image) error {
 	op.GeoM.Translate(0, 0)
 	screen.DrawImage(background, op)
 
+	// player
+	playerOp := &ebiten.DrawImageOptions{}
+	playerOp.GeoM.Translate(playerOne.xPos, playerOne.yPos)
+	screen.DrawImage(playerOne.image, playerOp)
+
 	return nil
 }
 
 func main() {
-	if err := ebiten.Run(update, 640, 480, 1, "Hello World!"); err != nil {
+	if err := ebiten.Run(update, screenWidth, screebHeight, 1, "Hello World!"); err != nil {
 		log.Fatal(err)
 	}
 }
