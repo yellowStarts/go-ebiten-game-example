@@ -17,3 +17,8 @@ $ make run
 ```
 $ make test-ebiten
 ```
+
+## 教程
+- [第一篇](https://medium.com/@chrisandrews_76960/2d-game-development-in-golang-part-1-5e2c11a513ed)
+- [第二篇](https://medium.com/@chrisandrews_76960/2d-game-development-in-golang-part-2-5372e9338488)
+- [第三篇](https://medium.com/@chrisandrews_76960/2d-game-development-in-golang-part-3-a296aedea77b)
