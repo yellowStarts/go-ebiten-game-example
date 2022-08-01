@@ -43,8 +43,27 @@ func init() {
 	playerOne = player{spaceShip, screenWidth / 2.0, screebHeight / 2.0, 4}
 }
 
+// movePlayer 玩家移动
+func movePlayer() {
+	if ebiten.IsKeyPressed(ebiten.KeyUp) {
+		playerOne.yPos -= playerOne.speed
+	}
+	if ebiten.IsKeyPressed(ebiten.KeyDown) {
+		playerOne.yPos += playerOne.speed
+	}
+	if ebiten.IsKeyPressed(ebiten.KeyLeft) {
+		playerOne.xPos -= playerOne.speed
+	}
+	if ebiten.IsKeyPressed(ebiten.KeyRight) {
+		playerOne.xPos += playerOne.speed
+	}
+}
+
 // update 更新画布
 func update(screen *ebiten.Image) error {
+	// 更新移动方法
+	movePlayer()
+
 	if ebiten.IsDrawingSkipped() {
 		return nil
 	}
